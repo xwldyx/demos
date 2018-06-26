@@ -1,0 +1,31 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:sample.jks
+    key-store-password: secret
+    key-password: password
+
+spring:
+  jmx:
+    enabled: false
+  cloud:
+    gateway:
+      default-filters:
+      #进来的path先加上前缀再匹配
+      #- PrefixPath=/gateway
+       - VerifyJwtToken=Authorization, http://127.0.0.1:8766/verifyToken
+      routes:
+      - id: account
+        predicates:
+        - Path=/account/**
+        uri: http://127.0.0.1:8766
+        order: 9000
+      - id: subscribe
+        predicates:
+        - Path=/**
+        uri: http://127.0.0.1:8766/account/testb?model=all
+        order: 10000
+
+
+#management.endpoints.web.exposure.include: '*'
