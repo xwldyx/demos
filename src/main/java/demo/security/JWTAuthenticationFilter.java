@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.filter.GenericFilterBean;
 
-@WebFilter(filterName = "jwtAuthenticationFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "jwtAuthenticationFilter", urlPatterns = "/*")
 class JWTAuthenticationFilter extends GenericFilterBean {
 
 	@Override

@@ -17,6 +17,7 @@ import demo.repository.RoleRepository;
 import demo.security.JwtTokenUtils;
 
 @RestController
+@RequestMapping(value = "/account")
 public class AccountController {
 
 	@Autowired  

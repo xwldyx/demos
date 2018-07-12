@@ -4,12 +4,17 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtTokenUtils {
-	static final long EXPIRATIONTIME = 432_000_000;     // 5天
+	private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtils.class);
+
+	static final long EXPIRATIONTIME = 5_000;     // 5天
 	static final String SECRET = "P@ssw02d";            // JWT密码
 	static final String TOKEN_PREFIX = "Bearer";        // Token前缀
 	static final String HEADER_STRING = "Authorization";// 存放Token的Header Key
@@ -22,14 +27,6 @@ public class JwtTokenUtils {
 				.signWith(SignatureAlgorithm.HS512, SECRET)
 				.compact();
 		return token;
-		/*// 将 JWT 写入 body
-		try {
-			response.setContentType("application/json");
-			response.setStatus(HttpServletResponse.SC_OK);
-			response.getOutputStream().println(JWT);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 	}
 
 	/**
@@ -63,16 +60,24 @@ public class JwtTokenUtils {
 	public static boolean verifyToken(HttpServletRequest request) {
 		String token = request.getHeader(HEADER_STRING);
 		if (token != null) {
-
-			return !isTokenExpired(token);
+			try {
+				return !isTokenExpired(token);
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+				return false;
+			}
 		}else
 			return false;
 	}
-	
+
 	public static boolean verifyToken(String token) {
 		if (token != null) {
-
-			return !isTokenExpired(token);
+			try {
+				return !isTokenExpired(token);
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+				return false;
+			}
 		}else
 			return false;
 	}
