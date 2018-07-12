@@ -1,0 +1,4 @@
+spring:
+  webservices:
+    path: /service
+    wsdl-locations: classpath:/xsd
