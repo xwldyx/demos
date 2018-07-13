@@ -1,0 +1,29 @@
+debug: false
+  
+spring:
+  application:
+    name: demo
+  http:
+    encoding:
+      charset: UTF-8
+  profiles:
+    active: dev12
+    include: 
+    
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: user
+    password: gdsftest2014
+    url: jdbc:mysql://10.1.12.221:3306/test?zeroDateTimeBehavior=convertToNull        
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      
+  security:
+    user:
+      name: user
+      password: 123
+
+    
+    
