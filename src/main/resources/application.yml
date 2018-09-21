@@ -1,0 +1,44 @@
+debug: false
+    
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+    include: 
+    
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: quartzdb
+    username: user
+    password: gdsftest2014
+    url: jdbc:mysql://10.1.12.221:3306/quartzdb?zeroDateTimeBehavior=CONVERT_TO_NULL
+      
+  jpa:
+    show-sql: true
+
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 3
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+    #初始化表结构，没用
+#    jdbc:
+#      initialize-schema: always
+
