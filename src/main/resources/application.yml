@@ -1,0 +1,14 @@
+alipay:
+  sign_type: RSA2
+  app_id: 2341234
+  app_private_key: asdf
+  app_public_key: grgr
+  alipay_public_key: ghwh
+  alipay_gateway: https://openapi.alipaydev.com/gateway.do
+  
+wxpay:
+  appid: 45234
+  app_secrect: asdfgrg
+  mch_id: sdvad
+  app_key: ewrwrtwert
+  notify_url: http://127.0.0.1:8080/pay/weixin/asyncResult
